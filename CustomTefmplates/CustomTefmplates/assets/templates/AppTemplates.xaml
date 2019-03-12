@@ -5,19 +5,102 @@
     <Style x:Key="DefaultBtn" TargetType="Button">
         <Setter Property="Template" >
             <Setter.Value>
-                <ControlTemplate>
-                    <Border>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding  Background}" >
+                        <ContentPresenter />
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            To="Red" Duration="0:0:1"
+                                         />
+                                        <DoubleAnimation 
+                                         Storyboard.TargetProperty="Width"
+                                         To="360" Duration="0:0:1"
+                                         />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            To="Green" Duration="0:0:1"
+                                         />
+                                        <DoubleAnimation 
+                                         Storyboard.TargetProperty="Width"
+                                         To="300" Duration="0:0:1"
+                                         />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            To="Blue" Duration="0:0:1"
+                                         />
+                                        <DoubleAnimation 
+                                         Storyboard.TargetProperty="Width"
+                                         To="300" Duration="0:0:1"
+                                         />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            To="Red" Duration="0:0:1"
+                                         />
+                                        <DoubleAnimation 
+                                         Storyboard.TargetProperty="Width"
+                                         To="360" Duration="0:0:1"
+                                         />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+                    </ControlTemplate.Triggers>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="btn" TargetType="Button">
-        <Border>
+    <Style x:Key="AcceptBtn" TargetType="Button" BasedOn="{StaticResource DefaultBtn}">
+        <Setter Property="Background" Value="DarkViolet"/>
+
+        <!--<Setter Property="ContentTemplate" Value="{StaticResource template1}"/>-->
+    </Style>
+
+    <!--<DataTemplate x:Key="template1">
+        <TextBlock Text="{Binding}" FontSize="22" FontWeight="Bold" TextWrapping="Wrap"></TextBlock>
+    </DataTemplate>-->
+
+    <!--<ControlTemplate x:Key="btn" TargetType="Button">
+        <Border Background="{TemplateBinding  Background}" >
             <ContentPresenter />
         </Border>
-        
-    </ControlTemplate>
-    
+    </ControlTemplate>-->
+
+
 </ResourceDictionary>

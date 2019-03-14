@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomTefmplates"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="300">
+        Title="MainWindow" Height="220" Width="350">
     <Window.Background>
         <ImageBrush ImageSource="/images/green.jpg" />
     </Window.Background>
@@ -15,15 +15,28 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+         
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="80" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="5" Style="{StaticResource DefaultBtnStyle}" Content="Accept"/>
-        <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource CancelBtn}" Content="Cancel"/>
+        <TextBlock Text="E-mail" Style="{StaticResource AppText}"/>
+        <TextBlock Text="Password" Grid.Row="1" Style="{StaticResource AppText}"/>
+
+        <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="5"/>
+        <PasswordBox Grid.Row="1" Grid.Column="1" Style="{StaticResource CustomPassBox}" Margin="5"/>
+
+        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <CheckBox Style="{StaticResource CustomCheckBox}"/>
+            <TextBlock Text="Remember me " Style="{StaticResource AppText}"/>
+        </WrapPanel>
+        
+        <WrapPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button Grid.Row="5" Style="{StaticResource DefaultBtnStyle}" Content="Accept"/>
+            <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource CancelBtn}" Content="Cancel"/>
+        </WrapPanel>
+
     </Grid>
 </Window>

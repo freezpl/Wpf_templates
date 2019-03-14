@@ -6,13 +6,24 @@
     <Color x:Key="HoverBtnColor" A="200" R="196" G="255" B="200" />
     <Color x:Key="PressBtnColor" A="255" R="0" G="50" B="4" />
     <Color x:Key="PressBtnColor2" A="128" R="0" G="50" B="4" />
-    
+
     <Color x:Key="BorderLightC" A="150" R="255" G="255" B="255" />
     <Color x:Key="BorderDarkC" A="255" R="200" G="200" B="200" />
+    <Color x:Key="CheckMarker">#008e0b</Color>
+
+
+    <Style x:Key="AppText" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
 
     <Style x:Key="DefaultBtnStyle" TargetType="Button">
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="120"/>
+        <Setter Property="Margin" Value="5 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -84,7 +95,7 @@
                             <ContentPresenter Grid.Column="1" Margin="2"
                             HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16"/>
                         </Grid>
-                        
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -94,6 +105,7 @@
     <Style x:Key="CancelBtn" TargetType="Button">
         <Setter Property="Height" Value="40"/>
         <Setter Property="Width" Value="120"/>
+        <Setter Property="Margin" Value="5 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -165,6 +177,173 @@
                             <ContentPresenter Grid.Column="1" Margin="2"
                             HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16"/>
                         </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="CustomTextBox" TargetType="TextBox" >
+
+        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                    <Grid x:Name="MyGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Polygon VerticalAlignment="Center">
+                            <Polygon.Fill>
+                                <SolidColorBrush Color="White"/>
+                            </Polygon.Fill>
+                            <Polygon.Points>
+                                <PointCollection>
+                                    <Point X="0" Y="15"></Point>
+                                    <Point X="15" Y="0"></Point>
+                                    <Point X="15" Y="30"></Point>
+                                </PointCollection>
+                            </Polygon.Points>
+                        </Polygon>
+
+                        <Border Grid.Column="1" Name="Border" CornerRadius="2" Padding="2" BorderThickness="2" 
+                                BorderBrush="White">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource BorderLightC}" />
+                            </Border.Background>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                        </Border>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HoverBtnColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="CustomPassBox" TargetType="PasswordBox" >
+
+        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+
+                    <Grid x:Name="MyGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Polygon VerticalAlignment="Center">
+                            <Polygon.Fill>
+                                <SolidColorBrush Color="White"/>
+                            </Polygon.Fill>
+                            <Polygon.Points>
+                                <PointCollection>
+                                    <Point X="0" Y="15"></Point>
+                                    <Point X="15" Y="0"></Point>
+                                    <Point X="15" Y="30"></Point>
+                                </PointCollection>
+                            </Polygon.Points>
+                        </Polygon>
+
+                        <Border Grid.Column="1" Name="Border" CornerRadius="2" Padding="2" BorderThickness="2" 
+                                BorderBrush="White">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource BorderLightC}" />
+                            </Border.Background>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                        </Border>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HoverBtnColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="CustomCheckBox" TargetType="CheckBox">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Margin" Value="5 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border TextBlock.Foreground="White" x:Name="Border" CornerRadius="12" BorderThickness="2">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource BorderLightC}"/>
+                        </Border.BorderBrush>
+
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource TranspBtnColor}"/>
+                        </Border.Background>
+
+                        <Canvas Width="40" Height="24">
+                            <Ellipse  Canvas.Left="0" Canvas.Top="0" Width="20" Height="20" Name="Ellipse" 
+                                      Stroke="White" StrokeThickness="2">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{StaticResource CheckMarker}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Canvas>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Ellipse"
+                                                         Storyboard.TargetProperty="(Canvas.Left)"
+                                                         To="16" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
 
                     </Border>
                 </ControlTemplate>

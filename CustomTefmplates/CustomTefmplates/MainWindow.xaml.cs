@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomTefmplates.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,9 @@ namespace CustomTefmplates
         {
             InitializeComponent();
 
-
+            DataContext = new Autorithation();
+            
         }
+     
     }
 }

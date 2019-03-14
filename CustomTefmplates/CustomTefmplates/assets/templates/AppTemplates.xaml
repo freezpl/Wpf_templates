@@ -11,7 +11,6 @@
     <Color x:Key="BorderDarkC" A="255" R="200" G="200" B="200" />
     <Color x:Key="CheckMarker">#008e0b</Color>
 
-
     <Style x:Key="AppText" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -95,7 +94,6 @@
                             <ContentPresenter Grid.Column="1" Margin="2"
                             HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16"/>
                         </Grid>
-
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -186,6 +184,15 @@
 
 
     <Style x:Key="CustomTextBox" TargetType="TextBox" >
+
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="ToolTip"
+                Value="{Binding RelativeSource={RelativeSource Self},
+                    Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
 
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="MinHeight" Value="20" />
@@ -335,7 +342,7 @@
                                     <VisualTransition GeneratedDuration="0" To="Pressed" />
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver">
+                                <VisualState x:Name="Checked">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="Ellipse"
                                                          Storyboard.TargetProperty="(Canvas.Left)"

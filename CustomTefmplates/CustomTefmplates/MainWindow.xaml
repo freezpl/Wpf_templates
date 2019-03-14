@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="35"/>
             <RowDefinition />
          
         </Grid.RowDefinitions>
@@ -25,8 +25,10 @@
         <TextBlock Text="E-mail" Style="{StaticResource AppText}"/>
         <TextBlock Text="Password" Grid.Row="1" Style="{StaticResource AppText}"/>
 
-        <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="5"/>
-        <PasswordBox Grid.Row="1" Grid.Column="1" Style="{StaticResource CustomPassBox}" Margin="5"/>
+        <TextBox Grid.Column="1" Style="{StaticResource CustomTextBox}" Margin="5" 
+                 Text="{Binding Login, ValidatesOnDataErrors=True}" 
+                 />
+        <PasswordBox Name="pass" Grid.Row="1" Grid.Column="1" Style="{StaticResource CustomPassBox}" Margin="5"/>
 
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             <CheckBox Style="{StaticResource CustomCheckBox}"/>

@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomTefmplates"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="440">
+        Title="MainWindow" Height="320" Width="300">
+    <Window.Background>
+        <ImageBrush ImageSource="/images/green.jpg" />
+    </Window.Background>
     <Grid>
-        <Button x:Name="Mouse" Style="{StaticResource AcceptBtn}"  
-                Width="300" Height="100" Content="Choco!!!"/>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="5" Style="{StaticResource DefaultBtnStyle}" Content="Accept"/>
+        <Button Grid.Row="5" Grid.Column="1" Style="{StaticResource CancelBtn}" Content="Cancel"/>
     </Grid>
 </Window>

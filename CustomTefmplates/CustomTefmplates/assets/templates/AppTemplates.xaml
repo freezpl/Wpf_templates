@@ -2,105 +2,174 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomTefmplates.assets.templates">
 
-    <Style x:Key="DefaultBtn" TargetType="Button">
-        <Setter Property="Template" >
+    <Color x:Key="TranspBtnColor" A="0" R="255" G="255" B="255" />
+    <Color x:Key="HoverBtnColor" A="200" R="196" G="255" B="200" />
+    <Color x:Key="PressBtnColor" A="255" R="0" G="50" B="4" />
+    <Color x:Key="PressBtnColor2" A="128" R="0" G="50" B="4" />
+    
+    <Color x:Key="BorderLightC" A="150" R="255" G="255" B="255" />
+    <Color x:Key="BorderDarkC" A="255" R="200" G="200" B="200" />
+
+    <Style x:Key="DefaultBtnStyle" TargetType="Button">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding  Background}" >
-                        <ContentPresenter />
+                    <Border TextBlock.Foreground="White" x:Name="Border" CornerRadius="20" BorderThickness="2">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource BorderLightC}"/>
+                        </Border.BorderBrush>
+
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1"
+                                 StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource TranspBtnColor}"
+                            Offset="0" />
+                                <GradientStop Color="{StaticResource TranspBtnColor}"
+                            Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                            To="{StaticResource HoverBtnColor}" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetName="Ellipse" 
+                                                        Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor2}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="28" Height="28" Name="Ellipse">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{StaticResource HoverBtnColor}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Path 
+                                Width="16"
+                                Height="16"
+                                StrokeThickness="3"
+                                Data="M 0 8 L 8 14 M 7 14 L 16 2 ">
+                                <Path.Stroke>
+                                    <SolidColorBrush Color="Green" />
+                                </Path.Stroke>
+                            </Path>
+                            <ContentPresenter Grid.Column="1" Margin="2"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16"/>
+                        </Grid>
+                        
                     </Border>
-
-                    <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation 
-                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                            To="Red" Duration="0:0:1"
-                                         />
-                                        <DoubleAnimation 
-                                         Storyboard.TargetProperty="Width"
-                                         To="360" Duration="0:0:1"
-                                         />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation 
-                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                            To="Green" Duration="0:0:1"
-                                         />
-                                        <DoubleAnimation 
-                                         Storyboard.TargetProperty="Width"
-                                         To="300" Duration="0:0:1"
-                                         />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="PreviewMouseDown">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation 
-                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                            To="Blue" Duration="0:0:1"
-                                         />
-                                        <DoubleAnimation 
-                                         Storyboard.TargetProperty="Width"
-                                         To="300" Duration="0:0:1"
-                                         />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="PreviewMouseUp">
-                            <EventTrigger.Actions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation 
-                                            Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                            To="Red" Duration="0:0:1"
-                                         />
-                                        <DoubleAnimation 
-                                         Storyboard.TargetProperty="Width"
-                                         To="360" Duration="0:0:1"
-                                         />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger.Actions>
-                        </EventTrigger>
-
-                    </ControlTemplate.Triggers>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="AcceptBtn" TargetType="Button" BasedOn="{StaticResource DefaultBtn}">
-        <Setter Property="Background" Value="DarkViolet"/>
+    <Style x:Key="CancelBtn" TargetType="Button">
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="White" x:Name="Border" CornerRadius="20" BorderThickness="2">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource BorderLightC}"/>
+                        </Border.BorderBrush>
 
-        <!--<Setter Property="ContentTemplate" Value="{StaticResource template1}"/>-->
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1"
+                                 StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource TranspBtnColor}"
+                            Offset="0" />
+                                <GradientStop Color="{StaticResource TranspBtnColor}"
+                            Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                            To="{StaticResource HoverBtnColor}" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetName="Elipse" 
+                                                        Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor2}" Duration="0:0:0.1"/>
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                            To="{StaticResource PressBtnColor}" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="28" Height="28" Name="Elipse">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{StaticResource HoverBtnColor}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Path 
+                                Width="16"
+                                Height="16"
+                                StrokeThickness="3"
+                                Data="M 0 0 L 15 15 M 0 15 L 15 0 ">
+                                <Path.Stroke>
+                                    <SolidColorBrush Color="Red" />
+                                </Path.Stroke>
+                            </Path>
+                            <ContentPresenter Grid.Column="1" Margin="2"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16"/>
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-
-    <!--<DataTemplate x:Key="template1">
-        <TextBlock Text="{Binding}" FontSize="22" FontWeight="Bold" TextWrapping="Wrap"></TextBlock>
-    </DataTemplate>-->
-
-    <!--<ControlTemplate x:Key="btn" TargetType="Button">
-        <Border Background="{TemplateBinding  Background}" >
-            <ContentPresenter />
-        </Border>
-    </ControlTemplate>-->
-
 
 </ResourceDictionary>
